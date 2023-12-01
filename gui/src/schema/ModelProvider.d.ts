@@ -9,6 +9,7 @@ export type ModelProvider =
   | "openai"
   | "openai-free-trial"
   | "openai-agent"
+  | "openai-proxy"
   | "openai-aiohttp"
   | "anthropic"
   | "together"

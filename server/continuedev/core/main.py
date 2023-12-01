@@ -2,7 +2,10 @@ import json
 from typing import Any, AsyncGenerator, Dict, List, Literal, Optional, Union, cast
 
 from pydantic import BaseModel, Field, validator
-from pydantic.schema import schema
+from pydantic import BaseModel
+
+
+
 
 from ..models.main import ContinueBaseModel
 from .observation import Observation

@@ -18,7 +18,7 @@ from ..libs.llm.replicate import ReplicateLLM
 from ..libs.llm.text_gen_webui import TextGenWebUI
 from ..libs.llm.together import TogetherLLM
 from ..libs.llm.openai_agent import OpenAIAgent
-
+from ..libs.llm.openai_proxy import OpenAIProxy
 class ContinueSDK(BaseModel):
     pass
 
@@ -46,7 +46,8 @@ MODEL_CLASSES: Dict[str, Type[LLM]] = {
         GooglePaLMAPI,
         TextGenWebUI,
         LMStudio,
-        OpenAIAgent
+        OpenAIAgent,
+        OpenAIProxy
     ]
 }
 

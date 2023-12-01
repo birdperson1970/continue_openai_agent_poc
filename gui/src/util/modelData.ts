@@ -353,7 +353,7 @@ const gpt4turbo: ModelPackage = {
     title: "GPT-4 Turbo",
     api_key: "",
   },
-  providerOptions: ["openai", "freetrial", "openai-agent"],
+  providerOptions: ["openai", "freetrial", "openai-proxy"],
   icon: "openai.png",
 };
 
@@ -700,6 +700,27 @@ After it's up and running, you can start using Continue.`,
       "OpenAIAgent description",
     longDescription:
       'OpenAIAgent longDescription',
+    icon: "openai.png",
+    tags: [ModelProviderTag["Requires API Key"]],
+    packages: [gpt4turbo, gpt_3_5_turbo_1106],
+    collectInputFor: [
+      {
+        inputType: CollectInputType.text,
+        key: "api_key",
+        label: "API Key",
+        placeholder: "Enter your OpenAI API key",
+        required: true,
+      },
+      ...completionParamsInputs,
+    ],
+  },
+  openai_proxy: {
+    title: "OpenAIProxy",
+    provider: "openai-proxy",
+    description:
+      "OpenAIProxy description",
+    longDescription:
+      'OpenAIProxy longDescription',
     icon: "openai.png",
     tags: [ModelProviderTag["Requires API Key"]],
     packages: [gpt4turbo, gpt_3_5_turbo_1106],
