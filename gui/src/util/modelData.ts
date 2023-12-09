@@ -3,8 +3,8 @@ This is the data that populates the model selection page.
 */
 
 import _ from "lodash";
-import { ModelProvider } from "../schema/ModelProvider";
-import { ModelName } from "../schema/ModelName";
+import { Provider } from "../schema/ModelDescription";
+import { ModelName } from "../schema/ModelNameWrapper";
 
 export function updatedObj(old: any, pathToValue: { [key: string]: any }) {
   const newObject = _.cloneDeep(old);
@@ -134,7 +134,7 @@ const apiBaseInput: InputDescriptor = {
 
 export interface ModelInfo {
   title: string;
-  provider: ModelProvider;
+  provider: Provider;
   description: string;
   longDescription?: string;
   icon?: string;
@@ -511,6 +511,17 @@ export const PROVIDER_INFO: { [key: string]: ModelInfo } = {
       ...completionParamsInputs,
       { ...apiBaseInput, defaultValue: "http://localhost:11434" },
     ],
+  },
+  llamafile: {
+    title: "llamafile",
+    provider: "llamafile",
+    icon: "llamafile.png",
+    description:
+      "llamafiles are a self-contained binary to run an open-source LLM",
+    longDescription: `To get started with llamafiles, find and download a binary on their [GitHub repo](https://github.com/Mozilla-Ocho/llamafile#binary-instructions). Then run it with the following command:\n\n\`\`\`shell\nchmod +x ./llamafile\n./llamafile\n\`\`\``,
+    tags: [ModelProviderTag["Local"], ModelProviderTag["Open-Source"]],
+    packages: osModels,
+    collectInputFor: [...completionParamsInputs],
   },
   together: {
     title: "TogetherAI",

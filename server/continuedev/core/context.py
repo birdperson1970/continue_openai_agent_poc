@@ -1,10 +1,10 @@
 import asyncio
 import time
 from abc import abstractmethod
-from typing import Any, Awaitable, Callable, List, Optional
+from typing import Annotated, Any, Awaitable, Callable, List, Optional
 
 from meilisearch_python_async import Client
-from pydantic import BaseModel, Field
+from pydantic import ConfigDict, BaseModel, Field, WithJsonSchema
 
 from ..libs.util.create_async_task import create_async_task
 from ..libs.util.devdata import dev_data_logger
@@ -53,10 +53,10 @@ class ContextProvider(BaseModel):
     )
     ide: Any = None
 
-    delete_documents: Callable[[List[str]], Awaitable] = Field(
+    delete_documents: Annotated[Callable[[List[str]], Awaitable], WithJsonSchema({'type': 'string'}, mode='validation')] = Field(
         None, description="Function to delete documents"
     )
-    update_documents: Callable[[List[ContextItem], str], Awaitable] = Field(
+    update_documents: Annotated[Callable[[List[ContextItem], str], Awaitable], WithJsonSchema({'type': 'string'}, mode='validation')] = Field(
         None, description="Function to update documents"
     )
 
@@ -79,10 +79,7 @@ class ContextProvider(BaseModel):
     selected_items: List[ContextItem] = Field(
         [], description="List of selected items in the ContextProvider"
     )
-
-    class Config:
-        arbitrary_types_allowed = True
-        exclude = {"ide", "delete_documents", "update_documents"}
+    model_config = ConfigDict(arbitrary_types_allowed=True, exclude={"ide", "delete_documents", "update_documents"})
 
     def get_description(self) -> ContextProviderDescription:
         return ContextProviderDescription(
@@ -94,7 +91,7 @@ class ContextProvider(BaseModel):
         )
 
     def dict(self, *args, **kwargs):
-        original_dict = super().dict(*args, **kwargs)
+        original_dict = super().model_dump(*args, **kwargs)
         original_dict.pop("ide", None)
         original_dict.pop("delete_documents", None)
         original_dict.pop("update_documents", None)

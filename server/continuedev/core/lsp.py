@@ -3,7 +3,7 @@ import threading
 from typing import List, Literal, Optional
 
 import aiohttp
-from pydantic import BaseModel
+from pydantic import ConfigDict, BaseModel
 
 from ..models.filesystem import RangeInFile
 from ..models.main import Position, Range
@@ -305,12 +305,10 @@ class ContinueLSPClient(BaseModel):
         if self.lsp_client is None:
             return False
         return self.lsp_client.ready
-
-    class Config:
-        arbitrary_types_allowed = True
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 
     def dict(self, **kwargs):
-        original_dict = super().dict(**kwargs)
+        original_dict = super().model_dump(**kwargs)
         original_dict.pop("lsp_client", None)
         return original_dict
 

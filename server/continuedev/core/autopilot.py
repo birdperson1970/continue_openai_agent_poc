@@ -6,6 +6,7 @@ from aiohttp import ClientPayloadError
 from continuedev.plugins.steps.openai_run_func import OpenAIRunFunction
 import openai
 import inspect
+import traceback
 
 from ..libs.llm.prompts.chat import template_alpaca_messages
 from ..libs.util.devdata import dev_data_logger
@@ -18,7 +19,8 @@ from ..server.protocols.gui_protocol import AbstractGUIProtocolServer
 from ..server.protocols.ide_protocol import AbstractIdeProtocolServer
 from .config import ContinueConfig
 from .context import ContextManager
-from .main import (
+
+from continuedev.core.main import (
     AutopilotGenerator,
     AutopilotGeneratorOutput,
     Context,
@@ -232,6 +234,10 @@ class Autopilot:
                 )
 
         except Exception as e:
+            stack_trace = traceback.format_exc()
+            # Log the stack trace
+            logger.error("An error occurred:\n" + stack_trace)
+
             continue_custom_exception = self.handle_error(e, step)
 
             yield SessionUpdate(index=index, update=SetStep(hide=False))
@@ -325,14 +331,14 @@ class Autopilot:
                 )
             )
 
-        logger_id = self.config.models.add_logger(add_log)
+        logger_id = self.sdk.models.add_logger(add_log)
 
         if step is not None:
             await self.run_step(step)
         while next_step := self.policy.next(self.sdk.config, self.session_state):  # type: ignore (stub type)
             await self.run_step(next_step)
 
-        self.config.models.remove_logger(logger_id)
+        self.sdk.models.remove_logger(logger_id)
 
     async def get_session_title(self) -> str:
         if self.sdk.config.disable_summaries:

@@ -5,7 +5,6 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type ModelDescription = ModelDescription1;
 /**
  * The title you wish to give your model.
  */
@@ -17,7 +16,6 @@ export type Provider =
   | "openai"
   | "openai-free-trial"
   | "openai-agent"
-  | "openai-proxy"
   | "openai-aiohttp"
   | "anthropic"
   | "together"
@@ -28,7 +26,8 @@ export type Provider =
   | "replicate"
   | "text-gen-webui"
   | "google-palm"
-  | "lmstudio";
+  | "lmstudio"
+  | "llamafile";
 /**
  * The name of the model. Used to autodetect prompt template.
  */
@@ -36,11 +35,11 @@ export type Model = string;
 /**
  * OpenAI, Anthropic, Together, or other API key
  */
-export type ApiKey = string;
+export type ApiKey = string | null;
 /**
  * The base URL of the LLM API.
  */
-export type ApiBase = string;
+export type ApiBase = string | null;
 /**
  * The maximum context length of the LLM in tokens, as counted by count_tokens.
  */
@@ -48,35 +47,31 @@ export type ContextLength = number;
 /**
  * The chat template used to format messages. This is auto-detected for most models, but can be overridden here.
  */
-export type Template = "llama2" | "alpaca" | "zephyr" | "phind" | "anthropic" | "chatml" | "deepseek";
-/**
- * Options for the completion endpoint. Read more about the completion options in the documentation.
- */
-export type CompletionOptions = BaseCompletionOptions;
+export type Template = ("llama2" | "alpaca" | "zephyr" | "phind" | "anthropic" | "chatml" | "deepseek") | null;
 /**
  * The temperature of the completion.
  */
-export type Temperature = number;
+export type Temperature = number | null;
 /**
  * The top_p of the completion.
  */
-export type TopP = number;
+export type TopP = number | null;
 /**
  * The top_k of the completion.
  */
-export type TopK = number;
+export type TopK = number | null;
 /**
  * The presence penalty Aof the completion.
  */
-export type PresencePenalty = number;
+export type PresencePenalty = number | null;
 /**
  * The frequency penalty of the completion.
  */
-export type FrequencyPenalty = number;
+export type FrequencyPenalty = number | null;
 /**
  * The stop tokens of the completion.
  */
-export type Stop = string[];
+export type Stop = string[] | null;
 /**
  * The maximum number of tokens to generate.
  */
@@ -84,33 +79,39 @@ export type MaxTokens = number;
 /**
  * The session_id of the UI.
  */
-export type SessionId = string;
+export type SessionId = string | null;
+/**
+ * The assistant_id of the UI.
+ */
+export type AssistantId = string | null;
 /**
  * A system message that will always be followed by the LLM
  */
-export type SystemMessage = string;
-/**
- * Options for the HTTP request to the LLM.
- */
-export type RequestOptions = RequestOptions1;
+export type SystemMessage = string | null;
 /**
  * Set the timeout for each request to the LLM. If you are running a local LLM that takes a while to respond, you might want to set this to avoid timeouts.
  */
-export type Timeout = number;
+export type Timeout = number | null;
 /**
  * Whether to verify SSL certificates for requests.
  */
-export type VerifySsl = boolean;
+export type VerifySsl = boolean | null;
 /**
  * Path to a custom CA bundle to use when making the HTTP request
  */
-export type CaBundlePath = string;
+export type CaBundlePath = string | null;
 /**
  * Proxy URL to use when making the HTTP request
  */
-export type Proxy = string;
+export type Proxy = string | null;
+/**
+ * Headers to use when making the HTTP request
+ */
+export type Headers = {
+  [k: string]: string;
+} | null;
 
-export interface ModelDescription1 {
+export interface ModelDescription {
   title: Title;
   provider: Provider;
   model: Model;
@@ -118,8 +119,14 @@ export interface ModelDescription1 {
   api_base?: ApiBase;
   context_length?: ContextLength;
   template?: Template;
-  completion_options?: CompletionOptions;
+  /**
+   * Options for the completion endpoint. Read more about the completion options in the documentation.
+   */
+  completion_options?: BaseCompletionOptions;
   system_message?: SystemMessage;
+  /**
+   * Options for the HTTP request to the LLM.
+   */
   request_options?: RequestOptions;
   [k: string]: unknown;
 }
@@ -132,19 +139,14 @@ export interface BaseCompletionOptions {
   stop?: Stop;
   max_tokens?: MaxTokens;
   session_id?: SessionId;
+  assistant_id?: AssistantId;
   [k: string]: unknown;
 }
-export interface RequestOptions1 {
+export interface RequestOptions {
   timeout?: Timeout;
   verify_ssl?: VerifySsl;
   ca_bundle_path?: CaBundlePath;
   proxy?: Proxy;
   headers?: Headers;
   [k: string]: unknown;
-}
-/**
- * Headers to use when making the HTTP request
- */
-export interface Headers {
-  [k: string]: string;
 }
