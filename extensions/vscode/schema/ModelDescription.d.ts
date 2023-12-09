@@ -16,6 +16,7 @@ export type Provider =
   | "openai"
   | "openai-free-trial"
   | "openai-agent"
+  | "openai-proxy"
   | "openai-aiohttp"
   | "anthropic"
   | "together"
