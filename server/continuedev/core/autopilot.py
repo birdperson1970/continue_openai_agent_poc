@@ -4,6 +4,7 @@ from typing import List, Optional, cast
 
 from aiohttp import ClientPayloadError
 from continuedev.plugins.steps.openai_run_func import OpenAIRunFunction
+from continuedev.plugins.steps.openai_agency import OpenAIAgency
 import openai
 import inspect
 import traceback

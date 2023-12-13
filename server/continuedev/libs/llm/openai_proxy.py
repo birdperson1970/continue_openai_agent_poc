@@ -63,8 +63,8 @@ class OpenAIProxy(LLM):
     def context_length_for_model(cls, v, values):
         return CONTEXT_LENGTH_FOR_MODEL.get(values["model"], 128000)
 
-    async def start(self, unique_id: Optional[str] = None):
-        await super().start(unique_id=unique_id)
+    def start(self, unique_id: Optional[str] = None):
+        super().start(unique_id=unique_id)
         self._name = f"agt_{unique_id[-6:]}"
 
        
@@ -87,11 +87,19 @@ class OpenAIProxy(LLM):
         from continuedev.plugins.steps.openai_agency import OpenAIAgency
 
         yield OpenAIAgency(
-            run_id=self._run_id,
             api_key=self.api_key,
             user_input= message.content,
             name=self._name,
             content="",
         )
+
+       # yield ChatMessage(role="assistant", content="done", summary="done")
+     
+
+
+
+        
+        
+     
 
 

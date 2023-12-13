@@ -1,5 +1,6 @@
 import html
 from typing import List, Optional
+from continuedev.plugins.steps.openai_agency import OpenAIAgency
 
 from continuedev.plugins.steps.openai_run_func import OpenAIRunFunction
 
@@ -67,8 +68,11 @@ class SimpleChatStep(Step):
                     self.description = self.description[:-end_size] + html.unescape(
                         self.description[-end_size:]
                     )
-            elif isinstance(chunk, OpenAIRunFunction):
-                await chunk.run(sdk=sdk)
+            elif isinstance(chunk, OpenAIRunFunction) or isinstance(chunk, OpenAIAgency):
+                print(f"Enter chunk = {type(chunk)}")
+                async for update in chunk.run(sdk=sdk):
+                    yield update
+                print(f"Exit chunk = {type(chunk)}")
 
         if sdk.config.disable_summaries:
             self.name = ""

@@ -65,6 +65,7 @@ class OpenAIRunFunction(Step):
             else:  
                 pbar.update(1)                
                 await asyncio.sleep(.2)  
+        yield SetStep(description="OpenAIRunFunction done...")
                
           
 
