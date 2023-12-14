@@ -92,6 +92,7 @@ class SocketIOMessenger:
                     )
             except asyncio.exceptions.CancelledError:
                 print(f"Cancelled task {message_type}")
+                return
 
     def post(self, msg: WebsocketsMessage):
         if msg.message_id in self.futures:

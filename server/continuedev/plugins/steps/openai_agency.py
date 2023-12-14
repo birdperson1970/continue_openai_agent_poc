@@ -42,21 +42,27 @@ tools.append(ShellTool)
 
 
 
-ceo = Agent(name="CEO",
+agent_po = Agent(name="agent_product_owner",
             description="Responsible for client communication, task planning and management.",
-            instructions="You must converse with other agents to ensure complete task execution.", # can be a file like ./instructions.md
+            instructions="docs/agents/agent_product_owner.md", # can be a file like ./instructions.md
             files_folder=None,
             tools=tools)
 
-dev = Agent(name="DEV",
-            description="Responsible for client communication, task planning and management.",
-            instructions="You must converse with other agents to ensure complete task execution.", # can be a file like ./instructions.md
+agent_arch = Agent(name="agent_architect",
+            description="Responsible for creating design and documentation for the project.",
+            instructions="docs/agents/agent_architect.md" ,# can be a file like ./instructions.md
             files_folder=None,
             tools=tools)
 
-va = Agent(name="Virtual Assitant",
-            description="Responsible for client communication, task planning and management.",
-            instructions="You must converse with other agents to ensure complete task execution.", # can be a file like ./instructions.md
+agent_dev = Agent(name="agent_dev",
+            description="Reposonsible for implementing all coding tasks.",
+            instructions="docs/agents/agent_product_developer.md", # can be a file like ./instructions.md
+            files_folder=None,
+            tools=tools)
+
+agent_va = Agent(name="agent_virtual_assitant",
+            description="Responsible for completing all other tasks.",
+            instructions="docs/agents/agent_virtual_assitant.md", # can be a file like ./instructions.md
             files_folder=None,
             tools=tools)
 
@@ -82,10 +88,12 @@ class OpenAIAgency(Step):
 
         if type(OpenAIAgency._agency) != Agency:
             OpenAIAgency._agency = Agency([
-                ceo,  # CEO will be the entry point for communication with the user
-                [ceo, dev],  # CEO can initiate communication with Developer
-                [ceo, va],   # CEO can initiate communication with Virtual Assistant
-                [dev, va]    # Developer can initiate communication with Virtual Assistant
+                agent_po,  # CEO will be the entry point for communication with the user
+                [agent_po, agent_dev],  # CEO can initiate communication with Developer
+                [agent_po, agent_va],   # CEO can initiate communication with Virtual Assistant
+                [agent_po, agent_arch],
+                [agent_po, agent_dev],
+                [agent_dev, agent_arch]            
             ], shared_instructions='docs/agents/manifesto.md') # shared instructions for all agents
 
         gen= (OpenAIAgency._agency.get_completion(self.user_input))

@@ -106,10 +106,10 @@
       "name": "Extension (VSCode)",
       "type": "extensionHost",
       "request": "launch",
-      "cwd": "/Users/laib/ai/continue_poc_test/",
+      "cwd": "/Users/laib/ai/slack_ai_agent/",
       "args": [
         // Pass a directory to manually test in
-        "/Users/laib/ai/continue_poc_test/",
+        "/Users/laib/ai/slack_ai_agent",
         "${workspaceFolder}/extensions/vscode/manual-testing-sandbox/example.ts",
         "--extensionDevelopmentPath=${workspaceFolder}/extensions/vscode"
       ],

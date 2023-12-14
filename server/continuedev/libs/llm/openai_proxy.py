@@ -68,9 +68,9 @@ class OpenAIProxy(LLM):
         self._name = f"agt_{unique_id[-6:]}"
 
        
+    async def _stream_complete(self, prompt: str, options):
+        yield "done"
 
-    async def _stream_complete(self, prompt, options):
-        return
 
     async def _stream_chat(self, messages: List[ChatMessage], options):
         if options.session_id is None:
