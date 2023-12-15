@@ -7,7 +7,7 @@ from agency_swarm import Agency
 from continuedev.core.main import ChatMessage, SetStep, Step, DeltaStep
 from continuedev.core.sdk import ContinueSDK, Models
 from continuedev.plugins.steps.openai_agency_tools import CurrentTimeTool, GetProjectFile, GoogleSearchTool, ListProjectFiles
-from continuedev.plugins.steps.shell_tool import ShellTool
+from continuedev.plugins.steps.shell_tool import GitHubTool, ShellTool
 from ...libs.util.logging import getLogger
 from langchain.tools import YouTubeSearchTool
 from agency_swarm.tools import ToolFactory
@@ -38,31 +38,32 @@ tools.append(GoogleSearchTool)
 tools.append(ListProjectFiles)
 tools.append(GetProjectFile)
 tools.append(ShellTool)
+tools.append(GitHubTool)
 
 
 
 
-agent_po = Agent(name="agent_product_owner",
+agent_po = Agent(name="agent-po",
             description="Responsible for client communication, task planning and management.",
-            instructions="docs/agents/agent_product_owner.md", # can be a file like ./instructions.md
+            instructions="docs/agents/agent-po.md", # can be a file like ./instructions.md
             files_folder=None,
             tools=tools)
 
-agent_arch = Agent(name="agent_architect",
+agent_arch = Agent(name="agent-architect",
             description="Responsible for creating design and documentation for the project.",
-            instructions="docs/agents/agent_architect.md" ,# can be a file like ./instructions.md
+            instructions="docs/agents/agent-architect.md" ,# can be a file like ./instructions.md
             files_folder=None,
             tools=tools)
 
-agent_dev = Agent(name="agent_dev",
+agent_dev = Agent(name="agent-developer",
             description="Reposonsible for implementing all coding tasks.",
-            instructions="docs/agents/agent_product_developer.md", # can be a file like ./instructions.md
+            instructions="docs/agents/agent-developer.md", # can be a file like ./instructions.md
             files_folder=None,
             tools=tools)
 
-agent_va = Agent(name="agent_virtual_assitant",
+agent_va = Agent(name="agent-va",
             description="Responsible for completing all other tasks.",
-            instructions="docs/agents/agent_virtual_assitant.md", # can be a file like ./instructions.md
+            instructions="docs/agents/agent-va.md", # can be a file like ./instructions.md
             files_folder=None,
             tools=tools)
 
@@ -101,7 +102,7 @@ class OpenAIAgency(Step):
         try:
             # Yield each message from the generator
             for bot_message in gen:
-                msg = bot_message.get_sender_emoji() + " " + bot_message.get_formatted_content()
+                msg =  bot_message.get_formatted_content()
                 print(f"msg: {msg}")
                 # yield ChatMessage(
                 #         role="assistant",

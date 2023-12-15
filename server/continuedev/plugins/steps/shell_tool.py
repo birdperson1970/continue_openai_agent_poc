@@ -234,7 +234,7 @@ def _get_platform() -> str:
 
 
 class ShellTool(BaseTool):
-    """Tool to run shell commands."""
+    """Tool to run shell commands excluding git and gh use theGitHubTool instead."""
 
     commands: List[str] = Field(
         ..., description="Run shell list of commands on this {_get_platform()} machine. The bash shell command and argument you wish to ececute."
@@ -243,7 +243,27 @@ class ShellTool(BaseTool):
     def run(self):
         process= _get_default_bash_process()
         from continuedev.plugins.steps.openai_agency import OpenAIAgency
-        commands = [f"cd {OpenAIAgency._sdk.ide.workspace_directory}", *self.commands]
+        sdk = OpenAIAgency._sdk
+        commands = [f"cd {sdk.ide.workspace_directory}", *self.commands]
         return process.run(commands)
 
  
+class GitHubTool(BaseTool):
+    """Tool to run GitHub commands."""
+    assitants_name: str = Field(
+        ..., description="Your name to set the correct GitHub credentials to."
+    )
+    commands: List[str] = Field(
+        ..., description="Run GitHub 'git' and 'gh' commands you wish to ececute."
+    )
+
+    def run(self):
+        process= _get_default_bash_process()
+        from continuedev.plugins.steps.openai_agency import OpenAIAgency
+
+
+        commands = [f"~/bin/git_switch.sh {self.assitants_name}", f"cd {OpenAIAgency._sdk.ide.workspace_directory}", *self.commands]
+        return process.run(commands)
+
+ 
+

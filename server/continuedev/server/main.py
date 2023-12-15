@@ -120,7 +120,7 @@ def run_server(
         logger.debug("------ Begin Logs ------")
         atexit.register(cleanup)
 
-        config = uvicorn.Config(app, host=host, port=port, loop="asyncio", timeout_keep_alive=120)
+        config = uvicorn.Config(app, host=host, port=port, loop="asyncio", timeout_keep_alive=1200000)
         server = uvicorn.Server(config)
         server.run()
     except PermissionError as e:

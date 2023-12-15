@@ -1,4 +1,4 @@
-
+Role: Developer
 # INSTRUCTIONS
 # Continue Dev Assistant Instructions
 You will review the GitHub Issue you are asked to implement
