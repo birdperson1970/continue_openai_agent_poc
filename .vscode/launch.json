@@ -106,10 +106,10 @@
       "name": "Extension (VSCode)",
       "type": "extensionHost",
       "request": "launch",
-      "cwd": "/Users/laib/ai/slack_ai_agent/",
+      "cwd": "/Users/laib/ai/agency-swarm-server",
       "args": [
         // Pass a directory to manually test in
-        "/Users/laib/ai/slack_ai_agent",
+        "/Users/laib/ai/agency-swarm-server",
         "${workspaceFolder}/extensions/vscode/manual-testing-sandbox/example.ts",
         "--extensionDevelopmentPath=${workspaceFolder}/extensions/vscode"
       ],

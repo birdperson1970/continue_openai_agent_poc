@@ -45,26 +45,30 @@ tools.append(GitHubTool)
 
 agent_po = Agent(name="agent-po",
             description="Responsible for client communication, task planning and management.",
-            instructions="docs/agents/agent-po.md", # can be a file like ./instructions.md
+            instructions="instructions/agent-po.md", # can be a file like ./instructions.md
             files_folder=None,
+            model="gpt-3.5-turbo-1106",
             tools=tools)
 
 agent_arch = Agent(name="agent-architect",
             description="Responsible for creating design and documentation for the project.",
-            instructions="docs/agents/agent-architect.md" ,# can be a file like ./instructions.md
+            instructions="instructions/agent-architect.md" ,# can be a file like ./instructions.md
             files_folder=None,
+            model="gpt-3.5-turbo-1106",
             tools=tools)
 
 agent_dev = Agent(name="agent-developer",
             description="Reposonsible for implementing all coding tasks.",
-            instructions="docs/agents/agent-developer.md", # can be a file like ./instructions.md
+            instructions="instructions/agent-developer.md", # can be a file like ./instructions.md
             files_folder=None,
+            model="gpt-3.5-turbo-1106",
             tools=tools)
 
 agent_va = Agent(name="agent-va",
             description="Responsible for completing all other tasks.",
-            instructions="docs/agents/agent-va.md", # can be a file like ./instructions.md
+            instructions="instructions/agent-va.md", # can be a file like ./instructions.md
             files_folder=None,
+            model="gpt-3.5-turbo-1106",
             tools=tools)
 
 
@@ -95,10 +99,9 @@ class OpenAIAgency(Step):
                 [agent_po, agent_arch],
                 [agent_po, agent_dev],
                 [agent_dev, agent_arch]            
-            ], shared_instructions='docs/agents/manifesto.md') # shared instructions for all agents
+            ], shared_instructions='agents/manifesto.md') # shared instructions for all agents
 
         gen= (OpenAIAgency._agency.get_completion(self.user_input))
-       
         try:
             # Yield each message from the generator
             for bot_message in gen:

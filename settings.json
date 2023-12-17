@@ -1,824 +1,12 @@
 [
     {
-        "id": "asst_hWIOlrBrZlDKp7RCuiPiKywB",
-        "created_at": 1702616791,
+        "id": "asst_BxqyFoAdNLeJP2cxJoLgdgtm",
+        "created_at": 1702637129,
         "description": "Responsible for client communication, task planning and management.",
         "file_ids": [],
-        "instructions": "## Manifesto of VRSEN AI\n\n### \ud83e\udded Our Mission\n\nTo empower businesses in their journey through the AI revolution. We are dedicated to providing bespoke, state-of-the-art AI solutions, ensuring no company is left behind in this transformative era of technology.\n\n### \ud83d\udd0d Our Vision\n\nWe aspire to be the world's premier provider of tailored AI solutions, seamlessly blending the personal touch of a boutique agency with the scale and efficiency of a global enterprise.\n\n### \u2696\ufe0f Our Values\n\n- **Operational Efficiency**: We are committed to developing systems that are not only efficient but also user-friendly, ensuring smooth onboarding and consistent quality.\n\n- **Radical Candor**: We foster a culture of honesty, encouraging clear feedback and open dialogue, underpinned by personal care and direct challenge.\n\n- **Reliable Excellence**: We aim to be the go-to company for AI solutions, consistently delivering superior customer service and product quality.\n\n- **Customer-Centric Innovation**: Our passion is to provide cutting-edge AI solutions, uniquely tailored to each customer's needs, ensuring their competitive edge.\n\n- **Global Ambition**: We dream big, striving to be a leading freelance business for tailored AI solutions globally.\n\n### \ud83d\uddfa\ufe0f Our Strategy\n\n- **Defining Success**: Our goal transcends market dominance; we aim to be the trusted partner for upper-middle businesses, driving their AI success and setting industry benchmarks.\n\n- **Where We Play**: We target the upper-middle segment in developed countries, engaging through platforms like YouTube and Medium, and expanding to LinkedIn, Twitter, and others as we grow.\n\n- **How We Win**: Our advantage lies in blending personalized service with cost-effective, custom AI solutions. Leveraging past experiences, we offer high-quality services at competitive prices.\n\n- **Required Capabilities**: We prioritize data security, keeping data client-side, and adaptability, ensuring seamless integration into existing products.\n\n- **Management Systems**: Our efficiency model uses checklists and systems for quality and consistency, with easily modifiable templates for rapid customization, reducing reliance on specialized talent.\n\n\n# INSTRUCTIONS\nYou must converse with other agents to ensure complete task execution.\nYou must create GitHub Issues and assign them to the appropriate agent.\nYou must review the completed issues for completeness and merge them into the main branch.\nYou must add comments to the issues as actions are carried out.\n\n",
+        "instructions": "agents/manifesto.md\n\nagent_id: agent-po\nagent_role: Product Owner\n\n# INSTRUCTIONS\nYou must converse with other agents to ensure complete task execution.\nYou must create GitHub Issues and assign them to the appropriate agent.\nYou must review the completed issues for completeness and merge them into the main branch.\nYou must add comments to the issues as actions are carried out.\n\n",
         "metadata": {},
-        "model": "gpt-4-1106-preview",
-        "name": "agent_product_owner",
-        "object": "assistant",
-        "tools": [
-            {
-                "function": {
-                    "name": "youtube_search",
-                    "parameters": {
-                        "properties": {
-                            "__arg1": {
-                                "default": null,
-                                "description": "",
-                                "title": "  Arg1",
-                                "type": "string"
-                            }
-                        },
-                        "type": "object",
-                        "required": []
-                    },
-                    "description": "search for youtube videos associated with a person. the input to this tool should be a comma separated list, the first part contains a person name and the second a number that is the maximum number of video results to return aka num_results. the second part is optional"
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "CurrentTimeTool",
-                    "parameters": {
-                        "properties": {
-                            "timezone_str": {
-                                "description": "The timezone you want the time in.",
-                                "title": "Timezone Str",
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "timezone_str"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Correctly extracted `CurrentTimeTool` with all the required parameters with correct types"
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "GoogleSearchTool",
-                    "parameters": {
-                        "properties": {
-                            "query_str": {
-                                "description": "A wrapper around Google Search. Useful for when you need to answer questions about current events. Input should be a search query. Output is a JSON array of the query results",
-                                "title": "Query Str",
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "query_str"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Correctly extracted `GoogleSearchTool` with all the required parameters with correct types"
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "ListProjectFiles",
-                    "parameters": {
-                        "properties": {},
-                        "type": "object",
-                        "required": []
-                    },
-                    "description": "Correctly extracted `ListProjectFiles` with all the required parameters with correct types"
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "GetProjectFile",
-                    "parameters": {
-                        "properties": {
-                            "file_path": {
-                                "file_path": "Get a project file. Input should be a file path from ListProjectFiles(). Output is the contents of the file",
-                                "title": "File Path",
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "file_path"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Correctly extracted `GetProjectFile` with all the required parameters with correct types"
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "ShellTool",
-                    "parameters": {
-                        "properties": {
-                            "commands": {
-                                "description": "Run shell list of commands on this {_get_platform()} machine. The bash shell command and argument you wish to ececute.",
-                                "items": {
-                                    "type": "string"
-                                },
-                                "title": "Commands",
-                                "type": "array"
-                            }
-                        },
-                        "required": [
-                            "commands"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Tool to run shell commands."
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "GitHubTool",
-                    "parameters": {
-                        "properties": {
-                            "assitants_name": {
-                                "description": "The assitants name to switch to. So the correct GitHub credentials are assigned.",
-                                "title": "Assitants Name",
-                                "type": "string"
-                            },
-                            "commands": {
-                                "description": "Run GitHub 'git' and 'gh' commands you wish to ececute.",
-                                "items": {
-                                    "type": "string"
-                                },
-                                "title": "Commands",
-                                "type": "array"
-                            }
-                        },
-                        "required": [
-                            "assitants_name",
-                            "commands"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Tool to run shell commands."
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "SendMessage",
-                    "parameters": {
-                        "$defs": {
-                            "recipient": {
-                                "const": "agent_architect",
-                                "title": "recipient"
-                            }
-                        },
-                        "properties": {
-                            "chain_of_thought": {
-                                "description": "Think step by step to determine the correct recipient and message.",
-                                "title": "Chain Of Thought",
-                                "type": "string"
-                            },
-                            "recipient": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/$defs/recipient"
-                                    }
-                                ],
-                                "description": "agent_architect: Responsible for creating design and documentation for the project.\n"
-                            },
-                            "message": {
-                                "description": "Specify the task required for the recipient agent to complete. Focus on clarifying what the task entails, rather than providing exact instructions.",
-                                "title": "Message",
-                                "type": "string"
-                            },
-                            "caller_agent_name": {
-                                "default": "agent_dev",
-                                "description": "The agent calling this tool. Defaults to your name. Do not change it.",
-                                "title": "Caller Agent Name",
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "chain_of_thought",
-                            "message",
-                            "recipient"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Use this tool to facilitate direct, synchronous communication between specialized agents within your agency. When you send a message using this tool, you receive a response exclusively from the designated recipient agent. To continue the dialogue, invoke this tool again with the desired recipient and your follow-up message. Remember, communication here is synchronous; the recipient agent won't perform any tasks post-response. You are responsible for relaying the recipient agent's responses back to the user, as they do not have direct access to these replies. Keep engaging with the tool for continuous interaction until the task is fully resolved."
-                },
-                "type": "function"
-            }
-        ]
-    },
-    {
-        "id": "asst_qlQK98IGztdiYEo4OK4kWAuu",
-        "created_at": 1702616792,
-        "description": "Reposonsible for implementing all coding tasks.",
-        "file_ids": [],
-        "instructions": "## Manifesto of VRSEN AI\n\n### \ud83e\udded Our Mission\n\nTo empower businesses in their journey through the AI revolution. We are dedicated to providing bespoke, state-of-the-art AI solutions, ensuring no company is left behind in this transformative era of technology.\n\n### \ud83d\udd0d Our Vision\n\nWe aspire to be the world's premier provider of tailored AI solutions, seamlessly blending the personal touch of a boutique agency with the scale and efficiency of a global enterprise.\n\n### \u2696\ufe0f Our Values\n\n- **Operational Efficiency**: We are committed to developing systems that are not only efficient but also user-friendly, ensuring smooth onboarding and consistent quality.\n\n- **Radical Candor**: We foster a culture of honesty, encouraging clear feedback and open dialogue, underpinned by personal care and direct challenge.\n\n- **Reliable Excellence**: We aim to be the go-to company for AI solutions, consistently delivering superior customer service and product quality.\n\n- **Customer-Centric Innovation**: Our passion is to provide cutting-edge AI solutions, uniquely tailored to each customer's needs, ensuring their competitive edge.\n\n- **Global Ambition**: We dream big, striving to be a leading freelance business for tailored AI solutions globally.\n\n### \ud83d\uddfa\ufe0f Our Strategy\n\n- **Defining Success**: Our goal transcends market dominance; we aim to be the trusted partner for upper-middle businesses, driving their AI success and setting industry benchmarks.\n\n- **Where We Play**: We target the upper-middle segment in developed countries, engaging through platforms like YouTube and Medium, and expanding to LinkedIn, Twitter, and others as we grow.\n\n- **How We Win**: Our advantage lies in blending personalized service with cost-effective, custom AI solutions. Leveraging past experiences, we offer high-quality services at competitive prices.\n\n- **Required Capabilities**: We prioritize data security, keeping data client-side, and adaptability, ensuring seamless integration into existing products.\n\n- **Management Systems**: Our efficiency model uses checklists and systems for quality and consistency, with easily modifiable templates for rapid customization, reducing reliance on specialized talent.\n\n\n# INSTRUCTIONS\n# Continue Dev Assistant Instructions\nYou will review the GitHub Issue you are asked to implement\nYou will try and complete the issue and if it is too large break it down into small and easier to implement issues\nYou always write both the code and unit tests\nYour code must be of the highest stand for understandability\nThe Issue is not considered complete until it has test which pass and logging.\nAll important changes and decions will be captured in the issue comments.\n",
-        "metadata": {},
-        "model": "gpt-4-1106-preview",
-        "name": "agent_dev",
-        "object": "assistant",
-        "tools": [
-            {
-                "function": {
-                    "name": "youtube_search",
-                    "parameters": {
-                        "properties": {
-                            "__arg1": {
-                                "default": null,
-                                "description": "",
-                                "title": "  Arg1",
-                                "type": "string"
-                            }
-                        },
-                        "type": "object",
-                        "required": []
-                    },
-                    "description": "search for youtube videos associated with a person. the input to this tool should be a comma separated list, the first part contains a person name and the second a number that is the maximum number of video results to return aka num_results. the second part is optional"
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "CurrentTimeTool",
-                    "parameters": {
-                        "properties": {
-                            "timezone_str": {
-                                "description": "The timezone you want the time in.",
-                                "title": "Timezone Str",
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "timezone_str"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Correctly extracted `CurrentTimeTool` with all the required parameters with correct types"
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "GoogleSearchTool",
-                    "parameters": {
-                        "properties": {
-                            "query_str": {
-                                "description": "A wrapper around Google Search. Useful for when you need to answer questions about current events. Input should be a search query. Output is a JSON array of the query results",
-                                "title": "Query Str",
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "query_str"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Correctly extracted `GoogleSearchTool` with all the required parameters with correct types"
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "ListProjectFiles",
-                    "parameters": {
-                        "properties": {},
-                        "type": "object",
-                        "required": []
-                    },
-                    "description": "Correctly extracted `ListProjectFiles` with all the required parameters with correct types"
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "GetProjectFile",
-                    "parameters": {
-                        "properties": {
-                            "file_path": {
-                                "file_path": "Get a project file. Input should be a file path from ListProjectFiles(). Output is the contents of the file",
-                                "title": "File Path",
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "file_path"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Correctly extracted `GetProjectFile` with all the required parameters with correct types"
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "ShellTool",
-                    "parameters": {
-                        "properties": {
-                            "commands": {
-                                "description": "Run shell list of commands on this {_get_platform()} machine. The bash shell command and argument you wish to ececute.",
-                                "items": {
-                                    "type": "string"
-                                },
-                                "title": "Commands",
-                                "type": "array"
-                            }
-                        },
-                        "required": [
-                            "commands"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Tool to run shell commands."
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "GitHubTool",
-                    "parameters": {
-                        "properties": {
-                            "assitants_name": {
-                                "description": "The assitants name to switch to. So the correct GitHub credentials are assigned.",
-                                "title": "Assitants Name",
-                                "type": "string"
-                            },
-                            "commands": {
-                                "description": "Run GitHub 'git' and 'gh' commands you wish to ececute.",
-                                "items": {
-                                    "type": "string"
-                                },
-                                "title": "Commands",
-                                "type": "array"
-                            }
-                        },
-                        "required": [
-                            "assitants_name",
-                            "commands"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Tool to run shell commands."
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "SendMessage",
-                    "parameters": {
-                        "$defs": {
-                            "recipient": {
-                                "const": "agent_architect",
-                                "title": "recipient"
-                            }
-                        },
-                        "properties": {
-                            "chain_of_thought": {
-                                "description": "Think step by step to determine the correct recipient and message.",
-                                "title": "Chain Of Thought",
-                                "type": "string"
-                            },
-                            "recipient": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/$defs/recipient"
-                                    }
-                                ],
-                                "description": "agent_architect: Responsible for creating design and documentation for the project.\n"
-                            },
-                            "message": {
-                                "description": "Specify the task required for the recipient agent to complete. Focus on clarifying what the task entails, rather than providing exact instructions.",
-                                "title": "Message",
-                                "type": "string"
-                            },
-                            "caller_agent_name": {
-                                "default": "agent_dev",
-                                "description": "The agent calling this tool. Defaults to your name. Do not change it.",
-                                "title": "Caller Agent Name",
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "chain_of_thought",
-                            "message",
-                            "recipient"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Use this tool to facilitate direct, synchronous communication between specialized agents within your agency. When you send a message using this tool, you receive a response exclusively from the designated recipient agent. To continue the dialogue, invoke this tool again with the desired recipient and your follow-up message. Remember, communication here is synchronous; the recipient agent won't perform any tasks post-response. You are responsible for relaying the recipient agent's responses back to the user, as they do not have direct access to these replies. Keep engaging with the tool for continuous interaction until the task is fully resolved."
-                },
-                "type": "function"
-            }
-        ]
-    },
-    {
-        "id": "asst_x0onprDitTPVcrYgpUuJ0st5",
-        "created_at": 1702616793,
-        "description": "Responsible for completing all other tasks.",
-        "file_ids": [],
-        "instructions": "## Manifesto of VRSEN AI\n\n### \ud83e\udded Our Mission\n\nTo empower businesses in their journey through the AI revolution. We are dedicated to providing bespoke, state-of-the-art AI solutions, ensuring no company is left behind in this transformative era of technology.\n\n### \ud83d\udd0d Our Vision\n\nWe aspire to be the world's premier provider of tailored AI solutions, seamlessly blending the personal touch of a boutique agency with the scale and efficiency of a global enterprise.\n\n### \u2696\ufe0f Our Values\n\n- **Operational Efficiency**: We are committed to developing systems that are not only efficient but also user-friendly, ensuring smooth onboarding and consistent quality.\n\n- **Radical Candor**: We foster a culture of honesty, encouraging clear feedback and open dialogue, underpinned by personal care and direct challenge.\n\n- **Reliable Excellence**: We aim to be the go-to company for AI solutions, consistently delivering superior customer service and product quality.\n\n- **Customer-Centric Innovation**: Our passion is to provide cutting-edge AI solutions, uniquely tailored to each customer's needs, ensuring their competitive edge.\n\n- **Global Ambition**: We dream big, striving to be a leading freelance business for tailored AI solutions globally.\n\n### \ud83d\uddfa\ufe0f Our Strategy\n\n- **Defining Success**: Our goal transcends market dominance; we aim to be the trusted partner for upper-middle businesses, driving their AI success and setting industry benchmarks.\n\n- **Where We Play**: We target the upper-middle segment in developed countries, engaging through platforms like YouTube and Medium, and expanding to LinkedIn, Twitter, and others as we grow.\n\n- **How We Win**: Our advantage lies in blending personalized service with cost-effective, custom AI solutions. Leveraging past experiences, we offer high-quality services at competitive prices.\n\n- **Required Capabilities**: We prioritize data security, keeping data client-side, and adaptability, ensuring seamless integration into existing products.\n\n- **Management Systems**: Our efficiency model uses checklists and systems for quality and consistency, with easily modifiable templates for rapid customization, reducing reliance on specialized talent.\n\n# INSTRUCTIONS\nYou will be asked to find via and complete a range of tasks\n\n",
-        "metadata": {},
-        "model": "gpt-4-1106-preview",
-        "name": "agent_virtual_assitant",
-        "object": "assistant",
-        "tools": [
-            {
-                "function": {
-                    "name": "youtube_search",
-                    "parameters": {
-                        "properties": {
-                            "__arg1": {
-                                "default": null,
-                                "description": "",
-                                "title": "  Arg1",
-                                "type": "string"
-                            }
-                        },
-                        "type": "object",
-                        "required": []
-                    },
-                    "description": "search for youtube videos associated with a person. the input to this tool should be a comma separated list, the first part contains a person name and the second a number that is the maximum number of video results to return aka num_results. the second part is optional"
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "CurrentTimeTool",
-                    "parameters": {
-                        "properties": {
-                            "timezone_str": {
-                                "description": "The timezone you want the time in.",
-                                "title": "Timezone Str",
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "timezone_str"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Correctly extracted `CurrentTimeTool` with all the required parameters with correct types"
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "GoogleSearchTool",
-                    "parameters": {
-                        "properties": {
-                            "query_str": {
-                                "description": "A wrapper around Google Search. Useful for when you need to answer questions about current events. Input should be a search query. Output is a JSON array of the query results",
-                                "title": "Query Str",
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "query_str"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Correctly extracted `GoogleSearchTool` with all the required parameters with correct types"
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "ListProjectFiles",
-                    "parameters": {
-                        "properties": {},
-                        "type": "object",
-                        "required": []
-                    },
-                    "description": "Correctly extracted `ListProjectFiles` with all the required parameters with correct types"
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "GetProjectFile",
-                    "parameters": {
-                        "properties": {
-                            "file_path": {
-                                "file_path": "Get a project file. Input should be a file path from ListProjectFiles(). Output is the contents of the file",
-                                "title": "File Path",
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "file_path"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Correctly extracted `GetProjectFile` with all the required parameters with correct types"
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "ShellTool",
-                    "parameters": {
-                        "properties": {
-                            "commands": {
-                                "description": "Run shell list of commands on this {_get_platform()} machine. The bash shell command and argument you wish to ececute.",
-                                "items": {
-                                    "type": "string"
-                                },
-                                "title": "Commands",
-                                "type": "array"
-                            }
-                        },
-                        "required": [
-                            "commands"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Tool to run shell commands."
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "GitHubTool",
-                    "parameters": {
-                        "properties": {
-                            "assitants_name": {
-                                "description": "The assitants name to switch to. So the correct GitHub credentials are assigned.",
-                                "title": "Assitants Name",
-                                "type": "string"
-                            },
-                            "commands": {
-                                "description": "Run GitHub 'git' and 'gh' commands you wish to ececute.",
-                                "items": {
-                                    "type": "string"
-                                },
-                                "title": "Commands",
-                                "type": "array"
-                            }
-                        },
-                        "required": [
-                            "assitants_name",
-                            "commands"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Tool to run shell commands."
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "SendMessage",
-                    "parameters": {
-                        "$defs": {
-                            "recipient": {
-                                "const": "agent_architect",
-                                "title": "recipient"
-                            }
-                        },
-                        "properties": {
-                            "chain_of_thought": {
-                                "description": "Think step by step to determine the correct recipient and message.",
-                                "title": "Chain Of Thought",
-                                "type": "string"
-                            },
-                            "recipient": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/$defs/recipient"
-                                    }
-                                ],
-                                "description": "agent_architect: Responsible for creating design and documentation for the project.\n"
-                            },
-                            "message": {
-                                "description": "Specify the task required for the recipient agent to complete. Focus on clarifying what the task entails, rather than providing exact instructions.",
-                                "title": "Message",
-                                "type": "string"
-                            },
-                            "caller_agent_name": {
-                                "default": "agent_dev",
-                                "description": "The agent calling this tool. Defaults to your name. Do not change it.",
-                                "title": "Caller Agent Name",
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "chain_of_thought",
-                            "message",
-                            "recipient"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Use this tool to facilitate direct, synchronous communication between specialized agents within your agency. When you send a message using this tool, you receive a response exclusively from the designated recipient agent. To continue the dialogue, invoke this tool again with the desired recipient and your follow-up message. Remember, communication here is synchronous; the recipient agent won't perform any tasks post-response. You are responsible for relaying the recipient agent's responses back to the user, as they do not have direct access to these replies. Keep engaging with the tool for continuous interaction until the task is fully resolved."
-                },
-                "type": "function"
-            }
-        ]
-    },
-    {
-        "id": "asst_s4qibBV62bIbi6bl9XeyCKmP",
-        "created_at": 1702616794,
-        "description": "Responsible for creating design and documentation for the project.",
-        "file_ids": [],
-        "instructions": "## Manifesto of VRSEN AI\n\n### \ud83e\udded Our Mission\n\nTo empower businesses in their journey through the AI revolution. We are dedicated to providing bespoke, state-of-the-art AI solutions, ensuring no company is left behind in this transformative era of technology.\n\n### \ud83d\udd0d Our Vision\n\nWe aspire to be the world's premier provider of tailored AI solutions, seamlessly blending the personal touch of a boutique agency with the scale and efficiency of a global enterprise.\n\n### \u2696\ufe0f Our Values\n\n- **Operational Efficiency**: We are committed to developing systems that are not only efficient but also user-friendly, ensuring smooth onboarding and consistent quality.\n\n- **Radical Candor**: We foster a culture of honesty, encouraging clear feedback and open dialogue, underpinned by personal care and direct challenge.\n\n- **Reliable Excellence**: We aim to be the go-to company for AI solutions, consistently delivering superior customer service and product quality.\n\n- **Customer-Centric Innovation**: Our passion is to provide cutting-edge AI solutions, uniquely tailored to each customer's needs, ensuring their competitive edge.\n\n- **Global Ambition**: We dream big, striving to be a leading freelance business for tailored AI solutions globally.\n\n### \ud83d\uddfa\ufe0f Our Strategy\n\n- **Defining Success**: Our goal transcends market dominance; we aim to be the trusted partner for upper-middle businesses, driving their AI success and setting industry benchmarks.\n\n- **Where We Play**: We target the upper-middle segment in developed countries, engaging through platforms like YouTube and Medium, and expanding to LinkedIn, Twitter, and others as we grow.\n\n- **How We Win**: Our advantage lies in blending personalized service with cost-effective, custom AI solutions. Leveraging past experiences, we offer high-quality services at competitive prices.\n\n- **Required Capabilities**: We prioritize data security, keeping data client-side, and adaptability, ensuring seamless integration into existing products.\n\n- **Management Systems**: Our efficiency model uses checklists and systems for quality and consistency, with easily modifiable templates for rapid customization, reducing reliance on specialized talent.\n\n# INSTRUCTIONS\nYou will be assigned must design and document the entire solution.\nYour must review and update plantuml and mark down documents in the /docs directory\nBreak down any large Github Issues into smaller Github Issues until they are small enough to hand across to the Developer Agent.\nYou must add comments to the issues as actions are carried out.\n\n\n",
-        "metadata": {},
-        "model": "gpt-4-1106-preview",
-        "name": "agent_architect",
-        "object": "assistant",
-        "tools": [
-            {
-                "function": {
-                    "name": "youtube_search",
-                    "parameters": {
-                        "properties": {
-                            "__arg1": {
-                                "default": null,
-                                "description": "",
-                                "title": "  Arg1",
-                                "type": "string"
-                            }
-                        },
-                        "type": "object",
-                        "required": []
-                    },
-                    "description": "search for youtube videos associated with a person. the input to this tool should be a comma separated list, the first part contains a person name and the second a number that is the maximum number of video results to return aka num_results. the second part is optional"
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "CurrentTimeTool",
-                    "parameters": {
-                        "properties": {
-                            "timezone_str": {
-                                "description": "The timezone you want the time in.",
-                                "title": "Timezone Str",
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "timezone_str"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Correctly extracted `CurrentTimeTool` with all the required parameters with correct types"
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "GoogleSearchTool",
-                    "parameters": {
-                        "properties": {
-                            "query_str": {
-                                "description": "A wrapper around Google Search. Useful for when you need to answer questions about current events. Input should be a search query. Output is a JSON array of the query results",
-                                "title": "Query Str",
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "query_str"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Correctly extracted `GoogleSearchTool` with all the required parameters with correct types"
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "ListProjectFiles",
-                    "parameters": {
-                        "properties": {},
-                        "type": "object",
-                        "required": []
-                    },
-                    "description": "Correctly extracted `ListProjectFiles` with all the required parameters with correct types"
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "GetProjectFile",
-                    "parameters": {
-                        "properties": {
-                            "file_path": {
-                                "file_path": "Get a project file. Input should be a file path from ListProjectFiles(). Output is the contents of the file",
-                                "title": "File Path",
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "file_path"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Correctly extracted `GetProjectFile` with all the required parameters with correct types"
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "ShellTool",
-                    "parameters": {
-                        "properties": {
-                            "commands": {
-                                "description": "Run shell list of commands on this {_get_platform()} machine. The bash shell command and argument you wish to ececute.",
-                                "items": {
-                                    "type": "string"
-                                },
-                                "title": "Commands",
-                                "type": "array"
-                            }
-                        },
-                        "required": [
-                            "commands"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Tool to run shell commands."
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "GitHubTool",
-                    "parameters": {
-                        "properties": {
-                            "assitants_name": {
-                                "description": "The assitants name to switch to. So the correct GitHub credentials are assigned.",
-                                "title": "Assitants Name",
-                                "type": "string"
-                            },
-                            "commands": {
-                                "description": "Run GitHub 'git' and 'gh' commands you wish to ececute.",
-                                "items": {
-                                    "type": "string"
-                                },
-                                "title": "Commands",
-                                "type": "array"
-                            }
-                        },
-                        "required": [
-                            "assitants_name",
-                            "commands"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Tool to run shell commands."
-                },
-                "type": "function"
-            },
-            {
-                "function": {
-                    "name": "SendMessage",
-                    "parameters": {
-                        "$defs": {
-                            "recipient": {
-                                "const": "agent_architect",
-                                "title": "recipient"
-                            }
-                        },
-                        "properties": {
-                            "chain_of_thought": {
-                                "description": "Think step by step to determine the correct recipient and message.",
-                                "title": "Chain Of Thought",
-                                "type": "string"
-                            },
-                            "recipient": {
-                                "allOf": [
-                                    {
-                                        "$ref": "#/$defs/recipient"
-                                    }
-                                ],
-                                "description": "agent_architect: Responsible for creating design and documentation for the project.\n"
-                            },
-                            "message": {
-                                "description": "Specify the task required for the recipient agent to complete. Focus on clarifying what the task entails, rather than providing exact instructions.",
-                                "title": "Message",
-                                "type": "string"
-                            },
-                            "caller_agent_name": {
-                                "default": "agent_dev",
-                                "description": "The agent calling this tool. Defaults to your name. Do not change it.",
-                                "title": "Caller Agent Name",
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "chain_of_thought",
-                            "message",
-                            "recipient"
-                        ],
-                        "type": "object"
-                    },
-                    "description": "Use this tool to facilitate direct, synchronous communication between specialized agents within your agency. When you send a message using this tool, you receive a response exclusively from the designated recipient agent. To continue the dialogue, invoke this tool again with the desired recipient and your follow-up message. Remember, communication here is synchronous; the recipient agent won't perform any tasks post-response. You are responsible for relaying the recipient agent's responses back to the user, as they do not have direct access to these replies. Keep engaging with the tool for continuous interaction until the task is fully resolved."
-                },
-                "type": "function"
-            }
-        ]
-    },
-    {
-        "id": "asst_NvDAN94vLQ3fIY1NUcomKblM",
-        "created_at": 1702629428,
-        "description": "Responsible for client communication, task planning and management.",
-        "file_ids": [],
-        "instructions": "## Manifesto of VRSEN AI\n\n### \ud83e\udded Our Mission\n\nTo build the best systems for our users.  We know just like hunans agents/assistants are imperfect but if we:\n* Document and maintain our designs and user documentation\n* Track our work using GitHub issues\n* Create unit test and integration tests against our code to meet the requirements\n* Objectively review the output again the issue\n* Split difficult tasks into small manageable tasks\n\nBy following ths process we can overcome our imperfections.\n\ndocs/agents/agent-po.md",
-        "metadata": {},
-        "model": "gpt-4-1106-preview",
+        "model": "gpt-3.5-turbo-1106",
         "name": "agent-po",
         "object": "assistant",
         "tools": [
@@ -941,9 +129,9 @@
                     "name": "GitHubTool",
                     "parameters": {
                         "properties": {
-                            "assitants_name": {
-                                "description": "Your name to set the correct GitHub credentials to.",
-                                "title": "Assitants Name",
+                            "agent_id": {
+                                "description": "Your agent_id to authorize you on GitHub.",
+                                "title": "Agent Id",
                                 "type": "string"
                             },
                             "commands": {
@@ -956,7 +144,7 @@
                             }
                         },
                         "required": [
-                            "assitants_name",
+                            "agent_id",
                             "commands"
                         ],
                         "type": "object"
@@ -1015,13 +203,13 @@
         ]
     },
     {
-        "id": "asst_3yQJ1C9Is5EwKSLbCCdTTlR6",
-        "created_at": 1702629429,
+        "id": "asst_2JFL5NMAeUmLCymqrhCrtE3e",
+        "created_at": 1702637130,
         "description": "Reposonsible for implementing all coding tasks.",
         "file_ids": [],
-        "instructions": "## Manifesto of VRSEN AI\n\n### \ud83e\udded Our Mission\n\nTo build the best systems for our users.  We know just like hunans agents/assistants are imperfect but if we:\n* Document and maintain our designs and user documentation\n* Track our work using GitHub issues\n* Create unit test and integration tests against our code to meet the requirements\n* Objectively review the output again the issue\n* Split difficult tasks into small manageable tasks\n\nBy following ths process we can overcome our imperfections.\n\ndocs/agents/agent-developer.md",
+        "instructions": "agents/manifesto.md\n\nagent_id: agent-developer\nagent_role: Developer\n\n# INSTRUCTIONS\n# Continue Dev Assistant Instructions\nYou will review the GitHub Issue you are asked to implement\nYou will try and complete the issue and if it is too large break it down into small and easier to implement issues\nYou always write both the code and unit tests\nYour code must be of the highest stand for understandability\nThe Issue is not considered complete until it has test which pass and logging.\nAll important changes and decions will be captured in the issue comments.\n",
         "metadata": {},
-        "model": "gpt-4-1106-preview",
+        "model": "gpt-3.5-turbo-1106",
         "name": "agent-developer",
         "object": "assistant",
         "tools": [
@@ -1144,9 +332,9 @@
                     "name": "GitHubTool",
                     "parameters": {
                         "properties": {
-                            "assitants_name": {
-                                "description": "Your name to set the correct GitHub credentials to.",
-                                "title": "Assitants Name",
+                            "agent_id": {
+                                "description": "Your agent_id to authorize you on GitHub.",
+                                "title": "Agent Id",
                                 "type": "string"
                             },
                             "commands": {
@@ -1159,7 +347,7 @@
                             }
                         },
                         "required": [
-                            "assitants_name",
+                            "agent_id",
                             "commands"
                         ],
                         "type": "object"
@@ -1218,13 +406,13 @@
         ]
     },
     {
-        "id": "asst_5J3KPEXxavmlvf4LXnYINscn",
-        "created_at": 1702629429,
+        "id": "asst_F2GEgNYtjmJaJLcA06JwRrRi",
+        "created_at": 1702637130,
         "description": "Responsible for completing all other tasks.",
         "file_ids": [],
-        "instructions": "## Manifesto of VRSEN AI\n\n### \ud83e\udded Our Mission\n\nTo build the best systems for our users.  We know just like hunans agents/assistants are imperfect but if we:\n* Document and maintain our designs and user documentation\n* Track our work using GitHub issues\n* Create unit test and integration tests against our code to meet the requirements\n* Objectively review the output again the issue\n* Split difficult tasks into small manageable tasks\n\nBy following ths process we can overcome our imperfections.\n\ndocs/agents/agent-va.md",
+        "instructions": "agents/manifesto.md\n\nagent_id: agent-va\nagent_role: Virtual Assitant\n\n# INSTRUCTIONS\nYou will be asked to complete a range of tasks\n\n",
         "metadata": {},
-        "model": "gpt-4-1106-preview",
+        "model": "gpt-3.5-turbo-1106",
         "name": "agent-va",
         "object": "assistant",
         "tools": [
@@ -1347,9 +535,9 @@
                     "name": "GitHubTool",
                     "parameters": {
                         "properties": {
-                            "assitants_name": {
-                                "description": "Your name to set the correct GitHub credentials to.",
-                                "title": "Assitants Name",
+                            "agent_id": {
+                                "description": "Your agent_id to authorize you on GitHub.",
+                                "title": "Agent Id",
                                 "type": "string"
                             },
                             "commands": {
@@ -1362,7 +550,7 @@
                             }
                         },
                         "required": [
-                            "assitants_name",
+                            "agent_id",
                             "commands"
                         ],
                         "type": "object"
@@ -1421,13 +609,13 @@
         ]
     },
     {
-        "id": "asst_rx1zc2ByALTdhWyKrLAJdJey",
-        "created_at": 1702629430,
+        "id": "asst_7bD7KFbPRaV788HvhaxBlXiy",
+        "created_at": 1702637130,
         "description": "Responsible for creating design and documentation for the project.",
         "file_ids": [],
-        "instructions": "## Manifesto of VRSEN AI\n\n### \ud83e\udded Our Mission\n\nTo build the best systems for our users.  We know just like hunans agents/assistants are imperfect but if we:\n* Document and maintain our designs and user documentation\n* Track our work using GitHub issues\n* Create unit test and integration tests against our code to meet the requirements\n* Objectively review the output again the issue\n* Split difficult tasks into small manageable tasks\n\nBy following ths process we can overcome our imperfections.\n\ndocs/agents/agent-architect.md",
+        "instructions": "agents/manifesto.md\n\nagent_id: agent-architect\nagent_role: Architect\n\n# INSTRUCTIONS\nYou will be assigned must design and document the entire solution.\nYour must review and update plantuml and mark down documents in the /docs directory\nBreak down any large Github Issues into smaller Github Issues until they are small enough to hand across to the Developer Agent.\nYou must add comments to the issues as actions are carried out.\n\n\n",
         "metadata": {},
-        "model": "gpt-4-1106-preview",
+        "model": "gpt-3.5-turbo-1106",
         "name": "agent-architect",
         "object": "assistant",
         "tools": [
@@ -1550,9 +738,9 @@
                     "name": "GitHubTool",
                     "parameters": {
                         "properties": {
-                            "assitants_name": {
-                                "description": "Your name to set the correct GitHub credentials to.",
-                                "title": "Assitants Name",
+                            "agent_id": {
+                                "description": "Your agent_id to authorize you on GitHub.",
+                                "title": "Agent Id",
                                 "type": "string"
                             },
                             "commands": {
@@ -1565,7 +753,7 @@
                             }
                         },
                         "required": [
-                            "assitants_name",
+                            "agent_id",
                             "commands"
                         ],
                         "type": "object"

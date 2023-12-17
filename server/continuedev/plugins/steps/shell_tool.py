@@ -250,8 +250,8 @@ class ShellTool(BaseTool):
  
 class GitHubTool(BaseTool):
     """Tool to run GitHub commands."""
-    assitants_name: str = Field(
-        ..., description="Your name to set the correct GitHub credentials to."
+    agent_id: str = Field(
+        ..., description="Your agent_id to authorize you on GitHub."
     )
     commands: List[str] = Field(
         ..., description="Run GitHub 'git' and 'gh' commands you wish to ececute."
@@ -262,7 +262,7 @@ class GitHubTool(BaseTool):
         from continuedev.plugins.steps.openai_agency import OpenAIAgency
 
 
-        commands = [f"~/bin/git_switch.sh {self.assitants_name}", f"cd {OpenAIAgency._sdk.ide.workspace_directory}", *self.commands]
+        commands = [f"~/bin/git_switch.sh {self.agent_id}", f"cd {OpenAIAgency._sdk.ide.workspace_directory}", *self.commands]
         return process.run(commands)
 
  

@@ -1,4 +1,6 @@
-Role: Architect
+agent_id: agent-architect
+agent_role: Architect
+
 # INSTRUCTIONS
 You will be assigned must design and document the entire solution.
 Your must review and update plantuml and mark down documents in the /docs directory
